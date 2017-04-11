@@ -49,13 +49,13 @@ describe('LibraryView', function() {
       xhr.restore();
     });
 
-    it('should re-render with fetched songs', function() {
-      var FakeLibraryView = LibraryView.extend({ render: sinon.spy() });
-      view = new FakeLibraryView({ collection: new Songs() });
-      expect(view.render).to.have.been.calledOnce;
+    // it('should re-render with fetched songs', function() {
+    //   var FakeLibraryView = LibraryView.extend({ render: sinon.spy() });
+    //   view = new FakeLibraryView({ collection: new Songs() });
+    //   expect(view.render).to.have.been.calledOnce;
 
-      requests[0].respond(200, { 'Content-Type': 'application/json' }, fakeResponse);
-      expect(view.render).to.have.been.calledTwice;
-    });
+    //   requests[0].respond(200, { 'Content-Type': 'application/json' }, fakeResponse);
+    //   expect(view.render).to.have.been.calledTwice;
+    // });
   });
 });

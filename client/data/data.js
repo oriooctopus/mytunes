@@ -21,16 +21,27 @@
 //     artist: 'Aaliyah',
 //   }
 // ];
-var songData;
+var songData = [];
 $.ajax({
   url: 'http://parse.sfm8.hackreactor.com/mytunes/classes/songs',
   type: 'GET', 
   contentType: 'application/json',
   success: function(data) {
     songData = data.results;
+    library = new Songs(songData);
+    app = new AppModel({library: library});
+        
+    
+    // build a view for the top level of the whole app
+    appView = new AppView({model: app});
+
+    // put the view onto the screen
+    $('body').append(appView.render());
   },
   error: function(error) {
+  	debugger;
     console.log('error with songData ajax call!', error);
   }
-})
+});
+
 

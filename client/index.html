@@ -7,6 +7,7 @@
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/backbone/backbone.js"></script>
 
+    <script src="env/config.js"></script>
     <script src="data/data.js"></script>
 
     <script src="models/SongModel.js"></script>
@@ -18,6 +19,8 @@
     <script src="views/LibraryView.js"></script>
     <script src="views/LibraryEntryView.js"></script>
     <script src="views/AppView.js"></script>
+    <script src="views/SongQueueView.js"></script>
+    <script src="views/SongQueueEntryView.js"></script>
 
     <script>
       $(function() {
@@ -25,11 +28,15 @@
         var library = new Songs(songData);
         var app = new AppModel({library: library});
 
+        // var songQueue = new SongQueue();
+        // var songQueueView = new SongQueueView( {collection: songQueue} );
+        // debugger;
         // build a view for the top level of the whole app
         var appView = new AppView({model: app});
 
         // put the view onto the screen
         $('body').append(appView.render());
+        // $('body').append(songQueueView.render());
       });
     </script>
   </body>

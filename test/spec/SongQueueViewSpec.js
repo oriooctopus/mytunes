@@ -2,6 +2,11 @@ describe('SongQueueView', function() {
   var view, fakeSongs;
 
   beforeEach(function() {
+    songData1 = {
+      artist: 'data',
+      url: '/test/testsong.mp3',
+      title: 'test song'
+    };
     fakeSongs = new SongQueue([
       {
         artist: 'data',
@@ -33,6 +38,15 @@ describe('SongQueueView', function() {
     });
     view.collection.pop();
     expect(view.render).to.have.been.called;
+  });
+
+  it('dequeues when queue song is clicked', function() {
+    view = new SongQueueView({collection: fakeSongs});
+    
+    expect(view.collection.length).to.equal(2);
+    view.collection.pop();
+    expect(view.collection.length).to.equal(1);
+    
   });
 
 });

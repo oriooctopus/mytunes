@@ -1,5 +1,5 @@
 describe('Songs', function() {
-  xdescribe('when fetching song data from Parse', function() {
+  describe('when fetching song data from Parse', function() {
     var songs, fakeSongData, fakeResponse, xhr, requests;
 
     beforeEach(function() {
@@ -37,6 +37,7 @@ describe('Songs', function() {
 
     it('should populate itself with the data returned from the Parse server', function() {
       songs = new Songs();
+      debugger;
       requests[0].respond(200, { 'Content-Type': 'application/json' }, fakeResponse);
       expect(songs).to.have.length(2);
       expect(songs.at(0).get('title')).to.equal('Never Gonna Mock You Up');

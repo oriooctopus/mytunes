@@ -4,11 +4,13 @@ var SongQueue = Backbone.Collection.extend({
   model: SongModel,
 
   initialize: function() {
+    // debugger;
+    // this.set('songQueueView', new songQueueView(this));    
 
     this.on('add', function(e) {
       // if there are no songs in the queue 
       // this.SongQueueView({collection: e.collec});
-        // console.log(12345);
+
       if (this.models.length === 1) {
         // call playFirst
         this.playFirst();
@@ -16,19 +18,24 @@ var SongQueue = Backbone.Collection.extend({
 
     });
 
+    // this.on('add ended dequeue enqueue', function() {
+    //   debugger;
+    // });
+
     this.on('ended', function() {
       this.dequeue();
       if (this.models.length > 0) {
         this.playFirst();
       }
     });
-    // debugger;
 
     this.on('dequeue', function() {
       this.dequeue();
     });
 
-
+    // this.on('click', function() {
+    //   debugger;
+    // })
 
   },
 

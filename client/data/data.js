@@ -41,13 +41,10 @@ var getData = function(query) {
     url: 'http://parse.sfm8.hackreactor.com/mytunes/classes/songs',
     type: 'GET', 
     contentType: 'application/json',
-    // data: 'where={ "results": { "title": { "$nin": ["back"] } } }',
-    // data: 'where={"objectId": {"$in": ["n", 3]} }', {limit: 10, title: ''}
-    // data: { 'artist' : 'Aaliyah' },
-    data: 'where={"title": {"$regex": "' + query + '" }}',
 
-    // data: 'where={"titled": {"$nin": ["back"]} }',
-    // data: "where=" + escape(JSON.stringify({ "title": {"all": 'l'} })),
+    data: 'where={"title": {"$regex": "' + query + '" }}',
+`where={'title': ${query}}`
+
     success: function(data) {
       console.log(data);
       displayData(data);

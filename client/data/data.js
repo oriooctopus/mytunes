@@ -21,27 +21,48 @@
 //     artist: 'Aaliyah',
 //   }
 // ];
-var songData = [];
-$.ajax({
-  url: 'http://parse.sfm8.hackreactor.com/mytunes/classes/songs',
-  type: 'GET', 
-  contentType: 'application/json',
-  success: function(data) {
-    songData = data.results;
-    library = new Songs(songData);
-    app = new AppModel({library: library});
-        
-    
-    // build a view for the top level of the whole app
-    appView = new AppView({model: app});
+var displayData = function(data) {
+  $('body').html('');
+  songData = data.results;
+  library = new Songs(songData);
+  app = new AppModel({library: library});
+      
+  
+  // build a view for the top level of the whole app
+  appView = new AppView({model: app});
 
-    // put the view onto the screen
-    $('body').append(appView.render());
-  },
-  error: function(error) {
-  	debugger;
-    console.log('error with songData ajax call!', error);
-  }
-});
+  searchView = new SearchView();
+  // put the view onto the screen
+  $('body').append(searchView.render()).append(appView.render());
+};
+
+var getData = function(query) {
+  $.ajax({
+    url: 'http://parse.sfm8.hackreactor.com/mytunes/classes/songs',
+    type: 'GET', 
+    contentType: 'application/json',
+    // data: 'where={ "results": { "title": { "$nin": ["back"] } } }',
+    // data: 'where={"objectId": {"$in": ["n", 3]} }', {limit: 10, title: ''}
+    // data: { 'artist' : 'Aaliyah' },
+    data: 'where={"title": {"$regex": "' + query + '" }}',
+
+    // data: 'where={"titled": {"$nin": ["back"]} }',
+    // data: "where=" + escape(JSON.stringify({ "title": {"all": 'l'} })),
+    success: function(data) {
+      console.log(data);
+      displayData(data);
+    },
+    error: function(error) {
+      debugger;
+      console.log('error with songData ajax call!', error);
+    }
+  });
+};
+
+getData('');
+
+
+var songData = [];
+
 
 
